@@ -6,6 +6,7 @@ pipeline {
             steps {
                  script {
                       dir('iac/packer/') {
+                           sh 'packer init .'
                            sh 'packer build -var "aws_access_key=${AWS_ACCESS_KEY}" -var "aws_secret_key=${AWS_SECRET_KEY}"'
                            def packerImageId = readFile("ami-id.txt").trim()
                            env.PACKER_IMAGE_ID = packerImageId
