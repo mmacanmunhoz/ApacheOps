@@ -1,0 +1,56 @@
+---
+- name: Copy MyApp Content
+  copy:
+    src: ../../../../project/
+    dest: /var/www/html
+
+- name: Create Directory
+  file:
+    path: /var/www/html/admin
+    state: directory
+
+- name: Copy TXT 1
+  copy:
+    src: files/file.txt
+    dest: /var/www/html/admin
+
+- name: Copy TXT 2
+  copy:
+    src: files/file2.txt
+    dest: /var/www/html/admin
+
+- name: Copy TXT 3
+  copy:
+    src: files/liberado.txt
+    dest: /var/www/html/admin
+
+- name: Copy VHost Conf
+  copy:
+    src: files/core/000-default.conf
+    dest: /etc/apache2/sites-available/000-default.conf
+
+- name: Copy Mod Status
+  copy:
+    src: files/mod/status.conf
+    dest: /etc/apache2/mods-available/status.conf
+
+- name: Copy Mod Deflate
+  copy:
+    src: files/mod/deflate.conf
+    dest: /etc/apache2/mods-available/deflate.conf
+
+- name: Copy Core Log
+  copy:
+    src: files/core/logs-apache2
+    dest: /etc/logrotate.d/apache2
+
+- name: Copy Apache Conf
+  copy:
+    src: files/core/apache2.conf
+    dest: /etc/apache2/apache2.conf
+
+- name: Enable the site
+  shell:
+    cmd: a2ensite 000-default
+  notify:
+    - restart apache

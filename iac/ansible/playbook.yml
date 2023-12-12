@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: yes
+  become_method: sudo
+  become_user: root
+  
+  pre_tasks:
+  - include_tasks: ./myapp/tasks/pre_tasks.yml
+
+  roles:
+  - myapp

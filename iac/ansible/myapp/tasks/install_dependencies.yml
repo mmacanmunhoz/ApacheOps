@@ -1,0 +1,10 @@
+---
+- name: Update Packages
+  apt:
+    update_cache: yes
+
+- name: Install Packages
+  apt:
+    name:
+      - apache2
+    state: present
